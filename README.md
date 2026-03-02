@@ -1,33 +1,41 @@
-# 🎒 C# Inventory System
-> C# 콘솔을 활용한 RPG 스타일 인벤토리 + 전투 + 합성 시스템
-> C# 인터페이스와 디자인 패턴 적용을 연습하기 위함.
+🎒 C# Inventory System
 
-## 핵심 기능
-**아이템 추가 / 삭제:** List<Item> 기반의 인벤토리 슬롯 관리
-**장비 장착 / 해제:** 무기(Weapon) · 방어구(Armor) 슬롯에 장착 시 플레이어 스탯(ATK / DEF) 실시간 반영
-**포션 사용:** HP / MP 포션 사용 시 플레이어 수치 즉시 회복
-**장비 분해:** 장비를 재료 아이템으로 분해 (IDisassemblable 인터페이스)
-**정렬 시스템:** 등급순 · 무게순 오름차순 / 내림차순 정렬 (ISortStrategy 전략 패턴)
-**등급 필터:** 특정 등급 아이템만 필터링 출력
-**전투 시스템:** 몬스터 스폰 → 전투 → 경험치 획득 → 레벨업 → 아이템 드롭
-**드롭 시스템:** 몬스터 레벨·등급 기반 장비 / 포션 / 재료 확률 드롭 (IDropStrategy 전략 패턴)
-**합성 시스템:** 재료 조건 충족 시 최종 목표 아이템(전설의 용사검) 합성 → 게임 클리어
-**무게 제한:** 인벤토리 최대 무게(100) 초과 시 경고 출력
-**재료 스택:** 같은 재료는 한 슬롯에 최대 5개까지 자동 합산 (IStackable 인터페이스)
+C# 콘솔을 활용한 RPG 스타일 인벤토리 + 전투 + 합성 시스템
+C# 인터페이스와 디자인 패턴 적용을 연습하기 위함.
 
-## 사용 기술
-> Language: C# 8.0
-> >Framework: .NET Core
-> Data Structure: List<T>, Dictionary<K,V>, event Action<T>
 
-## 🧠 학습 포인트
-> 객체 지향 프로그래밍(OOP)의 상속을 이용해 Item → Weapon / Armor / Potion / Material 타입 계층을 구현함.
-> 인터페이스(IDamageable, IDropStrategy, ISortStrategy 등)를 사용하여 확장성과 교체 가능성을 확보함.
-> 전략 패턴으로 드롭 방식·정렬 기준을 Battle / Inventory 수정 없이 외부에서 주입할 수 있도록 설계함.
-> MonsterTable / ItemTable에 데이터 한 줄 추가만으로 새 몬스터·장비를 등록할 수 있도록 함.
-> 이벤트(event Action<T>)를 활용해 Inventory 내부 로직과 UI 출력을 분리함.
+📌 핵심 기능
 
-## 파일 구조
+아이템 추가 / 삭제: List<Item> 기반의 인벤토리 슬롯 관리
+장비 장착 / 해제: 무기(Weapon) · 방어구(Armor) 슬롯에 장착 시 플레이어 스탯(ATK / DEF) 실시간 반영
+포션 사용: HP / MP 포션 사용 시 플레이어 수치 즉시 회복
+장비 분해: 장비를 재료 아이템으로 분해 (IDisassemblable 인터페이스)
+정렬 시스템: 등급순 · 무게순 오름차순 / 내림차순 정렬 (ISortStrategy 전략 패턴)
+등급 필터: 특정 등급 아이템만 필터링 출력
+전투 시스템: 몬스터 스폰 → 전투 → 경험치 획득 → 레벨업 → 아이템 드롭
+드롭 시스템: 몬스터 레벨·등급 기반 장비 / 포션 / 재료 확률 드롭 (IDropStrategy 전략 패턴)
+합성 시스템: 재료 조건 충족 시 최종 목표 아이템(전설의 용사검) 합성 → 게임 클리어
+무게 제한: 인벤토리 최대 무게(100) 초과 시 경고 출력
+재료 스택: 같은 재료는 한 슬롯에 최대 5개까지 자동 합산 (IStackable 인터페이스)
+
+
+🛠 사용 기술
+
+Language: C# 8.0
+Framework: .NET Core
+Data Structure: List<T>, Dictionary<K,V>, event Action<T>
+
+
+🧠 학습 포인트
+
+객체 지향 프로그래밍(OOP)의 상속을 이용해 Item → Weapon / Armor / Potion / Material 타입 계층을 구현함.
+인터페이스(IDamageable, IDropStrategy, ISortStrategy 등)를 사용하여 확장성과 교체 가능성을 확보함.
+전략 패턴으로 드롭 방식·정렬 기준을 Battle / Inventory 수정 없이 외부에서 주입할 수 있도록 설계함.
+MonsterTable / ItemTable에 데이터 한 줄 추가만으로 새 몬스터·장비를 등록할 수 있도록 함.
+이벤트(event Action<T>)를 활용해 Inventory 내부 로직과 UI 출력을 분리함.
+
+
+📁 파일 구조
 csharp_prac_interface/
 │
 ├── Program.cs              # 진입점 — GameManager.Run() 호출
@@ -59,4 +67,3 @@ csharp_prac_interface/
     ├── ISortStrategy.cs    # 정렬 방법 (등급 / 무게 오름차순·내림차순)
     ├── IStackable.cs       # 스택 아이템 (AddStack, ConsumeStack)
     └── IDisassemblable.cs  # 장비 분해 (Disassemble → List<Material>)
-
